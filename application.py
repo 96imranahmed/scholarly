@@ -1,4 +1,5 @@
 from flask import Flask
+import pandas as pd
 
 # print a nice greeting.
 def say_hello(username = "World"):
@@ -6,9 +7,9 @@ def say_hello(username = "World"):
 
 # some bits of text for the page.
 header_text = '''
-    <html>\n<head> <title>EB Flask Test</title> </head>\n<body>'''
+    <html>\n<head> <title>Scholarly</title> </head>\n<body>'''
 instructions = '''
-    <p><em>Hint</em>: This is a RESTful web service! Append a username
+    <p><em>Hint</em>: This is up and running! RESTful web service! Append a username
     to the URL (for example: <code>/Thelonious</code>) to say hello to
     someone specific.</p>\n'''
 home_link = '<p><a href="/">Back</a></p>\n'
