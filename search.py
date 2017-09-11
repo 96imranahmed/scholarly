@@ -10,7 +10,7 @@ def search(term, matrix, search_indx, limit = 100):
     show_paper = True
     show_author = True
     filter_surname = False
-    sn_chk = "?surname="
+    sn_chk = "?username="
     paper_chk = "?paper"
     author_chk = "?author"
     surname = ""
