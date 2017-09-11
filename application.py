@@ -18,6 +18,13 @@ def search_decorator():
     query = request.args.get('term')
     return jsonify(search(query, search_arr, 0, 10))
 
+@app.route('/paper/<query>')
+def four_or_four(query):
+    return "<h2>Thanks for dropping by, this functionality is coming very soon!</h2>"
+
+@app.route('/author/<query>')
+def four_or_four_two(query):
+    return "<h2>Thanks for dropping by, this functionality is coming very soon!</h2>"
 # run the app.
 if __name__ == "__main__":
     app.debug = True
