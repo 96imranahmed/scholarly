@@ -35,7 +35,7 @@ def search(term, matrix, search_indx, limit = 100):
                     if surname.lower() in val.split()[-1].lower():
                         op[int(np.squeeze(idx))] = row
                 else:
-                    op[int(np.squeeze(idx))] = ro
+                    op[int(np.squeeze(idx))] = row
             elif row[0][1] == 'paper' and show_paper:
                 if filter_surname:
                     for auth in row[0][4]:
