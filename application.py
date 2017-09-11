@@ -6,26 +6,26 @@ from flask import Flask, abort, flash, redirect, render_template, request, url_f
 import pickle
 from search import search
 
-app = Flask(__name__)
+application = Flask(__name__)
 search_arr = pickle.load(file = open('./search_array.pickle', 'rb'))
 
-@app.route('/')
+@application.route('/')
 def main():
     return render_template('index.html')
 
-@app.route('/search/')
+@application.route('/search/')
 def search_decorator():
     query = request.args.get('term')
     return jsonify(search(query, search_arr, 0, 10))
 
-@app.route('/paper/<query>')
+@application.route('/paper/<query>')
 def four_or_four(query):
     return "<h2>Thanks for dropping by, this functionality is coming very soon!</h2>"
 
-@app.route('/author/<query>')
+@application.route('/author/<query>')
 def four_or_four_two(query):
     return "<h2>Thanks for dropping by, this functionality is coming very soon!</h2>"
-# run the app.
+# run the application.
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
+    application.debug = False
+    application.run()
