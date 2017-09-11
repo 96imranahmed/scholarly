@@ -4,3 +4,43 @@ body {
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
+
+.horizontal-centre { 
+    position: absolute !important;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+
+.centre {
+    position: absolute !important;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.full-width {
+    width: 80%;
+    max-width: 750px;
+}
+
+.partial-width {
+    width: 70%;
+    max-width: 500px;
+}
+
+.header-title {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.override-margins {
+    margin-top: 0px !important;
+    margin-bottom: 5px !important;
+}
+
+.results {
+    margin-top: 25px !important;
+}
