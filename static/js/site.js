@@ -5,7 +5,7 @@ particlesJS.load('particles-js', '/static/js/particle_config.json', function() {
 $( document ).ready(function() {
     $('.ui.search').search({
         apiSettings: {
-            url: 'search/?term={query}'
+            url: '/search/?term={query}'
         },
       type: 'category'
     });
