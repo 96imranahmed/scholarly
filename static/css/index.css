@@ -3,6 +3,7 @@ body {
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    width:100%; 
 }
 
 .header-title {
@@ -16,24 +17,18 @@ body {
     margin-bottom: 5px !important;
 }
 
-.results {
-    margin-top: 25px !important;
-}
-
 .horizontal-centre { 
     margin: 0 auto;
 }
 
 .partial-width {
     max-width: 600px;
-    width: 80%;
-    min-width: 320px;
+    width: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 
 @media only screen and (max-device-width: 430px) {   
     .search-pos {
@@ -49,6 +44,17 @@ body {
     position: absolute !important;
     left: 50%;
     top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.top-search-pos {
+    position: absolute !important;
+    left: 50%;
+    top: unset !important;
+    display: inline-block;
+    margin-top: 50px;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 80%;

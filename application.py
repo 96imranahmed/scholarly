@@ -19,12 +19,13 @@ def search_decorator():
     return jsonify(search(query, search_arr, 0, 10))
 
 @application.route('/paper/<query>')
-def four_or_four(query):
-    return "<h2>Thanks for dropping by, this functionality is coming very soon!</h2>"
+def paper_decorator(query):
+    return render_template('paper.html')
 
 @application.route('/author/<query>')
-def four_or_four_two(query):
-    return "<h2>Thanks for dropping by, this functionality is coming very soon!</h2>"
+def author_decorator(query):
+    return render_template('author.html')
+
 # run the application.
 if __name__ == "__main__":
     application.debug = False
