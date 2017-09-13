@@ -28,4 +28,5 @@ def four_or_four_two(query):
 # run the application.
 if __name__ == "__main__":
     application.debug = False
+    application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
     application.run()
