@@ -19,20 +19,37 @@ body {
 .results {
     margin-top: 25px !important;
 }
+
 .horizontal-centre { 
     margin: 0 auto;
 }
 
-.centre {
+.partial-width {
+    max-width: 600px;
+    width: 80%;
+    min-width: 320px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+@media only screen and (max-device-width: 430px) {   
+    .search-pos {
+        position: absolute !important;
+        left: 50%;
+        top: unset !important;
+        display: inline-block;
+        margin-top: 50px;
+    }
+} 
+
+.search-pos {
     position: absolute !important;
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-}
-
-.partial-width {
-    width: 70%;
-    max-width: 500px;
-    min-width: 350px;
+    width: 80%;
 }
