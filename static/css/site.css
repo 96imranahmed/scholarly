@@ -50,7 +50,6 @@ body {
 }
 
 .top-search-pos {
-    position: absolute !important;
     left: 50%;
     top: unset !important;
     display: inline-block;
@@ -58,4 +57,17 @@ body {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 80%;
+}
+
+.card-pos {
+    z-index: -1000;
+    margin: -20 auto !important;
+    width: 80% !important;
+    max-width: 750px !important;
+}
+
+canvas {
+    display:block;
+    position: fixed;
+    z-index: -10;
 }

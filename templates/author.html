@@ -1,20 +1,32 @@
 <html>
-    <head>   
-        <title>Scholarly</title>
-        {% include "header.html" %}
-        <script src="{{ url_for('static', filename='js/index.js')}}"></script>
-        <link href="{{ url_for('static', filename='css/index.css')}}" media="all" rel="stylesheet"/>
-    </head>
-    <body>
-        <div id="particles-js">
-            <div class="ui fluid category search top-search-pos">
-                    <div class="ui icon input partial-width">
-                        <input class="prompt" type="text" placeholder="Search by { ?author, ?paper, ?surname = ABC; }">
-                        <i class="search icon"></i>
-                    </div>
-                    <div class="results"></div>
+
+<head>
+    <title>Scholarly</title>
+    {% include "header.html" %}
+</head>
+
+<body>
+    <div id="particles-js" width="100%" height="100%">
+        <canvas class="particles-js-canvas" style="width: 100%; height: 100%;"></canvas>
+    </div>
+    <div class="ui fluid category search top-search-pos">
+        <div class="ui icon input partial-width">
+            <input class="prompt" type="text" value="{{ search_term }}" placeholder="Search by { ?author, ?paper, ?surname = ABC; }">
+            <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+    </div>
+    <div class="ui raised card card-pos">
+        <div class="content card-content">
+            <div class="header">{{ search_term }}</div>
+            <div class="meta">
+                <span class="category">Animals</span>
+            </div>
+            <div class="description">
+                <p></p>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
-      

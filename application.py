@@ -7,7 +7,9 @@ import pickle
 from search import search
 
 application = Flask(__name__)
-search_arr = pickle.load(file = open('./search_array.pickle', 'rb'))
+search_arr = pickle.load(file = open('./pickles/search_array.pickle', 'rb'))
+paper_id_title = pickle.load(file= open('./pickles/scholarly_id_paper_title.pickle', 'rb'))
+author_id_name = pickle.load(file=open('./pickles/scholarly_id_user_name.pickle','rb'))
 
 @application.route('/')
 def main():
@@ -20,11 +22,11 @@ def search_decorator():
 
 @application.route('/paper/<query>')
 def paper_decorator(query):
-    return render_template('paper.html')
+    return render_template('paper.html', search_term = paper_id_title[int(query)])
 
 @application.route('/author/<query>')
 def author_decorator(query):
-    return render_template('author.html')
+    return render_template('author.html', search_term = author_id_name[int(query)].title())
 
 # run the application.
 if __name__ == "__main__":
