@@ -44,7 +44,6 @@ def author_decorator(query):
         if idx > 0:
             similar_authors.append((search_arr[i, 0], num_papers_sub(search_arr[i, :]), "/author/" + str(search_arr[i, 2])))
     author_papers = get_papers_list(cur_item, int(query), search_arr, p_loc)
-    print(author_papers)
     return render_template('author.html', title = cur_item[0].title(), subtitle= subtitle, similar = similar_authors, papers = author_papers)
 
 # run the application.
