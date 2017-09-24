@@ -33,7 +33,7 @@ def paper_decorator(query):
     desc = '(' + months[date.month] + ' '  + str(date.year) +') ' + desc
     if len(desc) > 70:
         desc = desc[:desc.find(', ',40)] + " and others"
-    return render_template('paper.html', title = cur_item[0], subtitle = desc)
+    return render_template('paper.html', title = cur_item[0].replace("\n", "").replace("  ", " "), subtitle = desc)
 
 @application.route('/author/<query>')
 def author_decorator(query):
