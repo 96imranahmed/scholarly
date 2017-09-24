@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title>Scholarly</title>
+    {% include "header.html" %}
+    <script src="{{ url_for('static', filename='js/author.js')}}"></script>
+</head>
+
+<body>
+    <div id="particles-js" width="100%" height="100%">
+        <canvas class="particles-js-canvas" style="width: 100%; height: 100%;"></canvas>
+    </div>
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="Chevron Up Icon"></i></a>
+    <div class="ui fluid category search top-search-pos">
+        <div class="ui icon input partial-width">
+            <input class="prompt" type="text" value="{{ title }}" placeholder="Search by { ?author, ?paper, ?surname = ABC; }">
+            <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+    </div>
+    <div class="ui raised card card-pos">
+        <div class="content card-content">
+            <div class="header">{{ title }}</div>
+            <div class="meta">
+                <span class="category">{{ subtitle }}</span>
+            </div>
+            <div class="description">
+                <div class="ui styled fluid accordion">
+                    <div class="title">
+                        <i class="dropdown icon"></i> Papers
+                    </div>
+                    <div class="content">
+                        <div class="ui very relaxed animated list">
+                            {% for paper in papers %}
+                                <div class="item">
+                                    <i class="file icon"></i>
+                                    <div class="content">
+                                        <a class="header" href="{{ paper[0] }}">{{paper[1]}}</a>
+                                        <div class="description">{{paper[2]}}: {{paper[3]}}</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i> Related researchers
+                    </div>
+                    <div class="content">
+                        <p class="transition hidden">(Still on its way)</p>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i> Research Areas
+                    </div>
+                    <div class="content">
+                        <p>(Just give me some time)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
