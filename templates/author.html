@@ -47,6 +47,19 @@
                         <i class="dropdown icon"></i> Related researchers
                     </div>
                     <div class="content">
+                        <div class="ui very relaxed animated list">
+                            {% for sim in similar %}
+                                <div class="item">
+                                    <i class="student icon"></i>
+                                    <div class="content">
+                                        <div class="header"><a href="{{ sim[2] }}">{{sim[0]}}</a> - Similarity: {{sim[4]}}</div>
+                                        <div class="description">{{sim[1]}} including: {{sim[3]}}</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                     </div>
+                    <div class="content">
                         <p class="transition hidden">(Still on its way)</p>
                     </div>
                     <div class="title">

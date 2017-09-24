@@ -6,6 +6,7 @@ from sklearn.neighbors import NearestNeighbors
 import pickle
 from search import *
 from author import *
+import random
 
 application = Flask(__name__)
 p_loc, search_arr = pickle.load(file = open('./pickles/search_array.pickle', 'rb'))
@@ -41,8 +42,10 @@ def author_decorator(query):
     distances, indices = nbr_auth.kneighbors(get_user_research(paper_dist, cur_item[3]))
     similar_authors = []
     for idx, i in enumerate(indices[0]):
-        if idx > 0:
-            similar_authors.append((search_arr[i, 0], num_papers_sub(search_arr[i, :]), "/author/" + str(search_arr[i, 2])))
+        if not i == int(query):
+            rdm_paper = str(random.choice(search_arr[i, 4]))
+            similar_authors.append((search_arr[i, 0].title(), num_papers_sub(search_arr[i, :]), "/author/" + str(search_arr[i, 2]), rdm_paper.replace("\n", "").replace("  ", " "), str(round(distances[0][idx], 3))))
+    similar_authors = similar_authors[:10]
     author_papers = get_papers_list(cur_item, int(query), search_arr, p_loc)
     return render_template('author.html', title = cur_item[0].title(), subtitle= subtitle, similar = similar_authors, papers = author_papers)
 
