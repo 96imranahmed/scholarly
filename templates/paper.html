@@ -31,24 +31,33 @@
                                 <i class="dropdown icon"></i> Authors
                             </div>
                             <div class="content">
-                                    <div class="ui very relaxed animated list">
-                                        {% for auth in authors %}
-                                            <div class="item">
-                                                <i class="student icon"></i>
-                                                <div class="content">
-                                                    <div class="header"><a href="{{ auth[2] }}">{{auth[0]}}</a></div>
-                                                    <div class="description">{{auth[1]}} including: {{auth[3]}}</div>
-                                                </div>
+                                <div class="ui very relaxed animated list">
+                                    {% for auth in authors %}
+                                        <div class="item">
+                                            <i class="student icon"></i>
+                                            <div class="content">
+                                                <div class="header"><a href="{{ auth[2] }}">{{auth[0]}}</a></div>
+                                                <div class="description">{{auth[1]}} including: {{auth[3]}}</div>
                                             </div>
-                                        {% endfor %}
-                                    </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
-                           
                             <div class="title">
                                 <i class="dropdown icon"></i> Related Papers
                             </div>
                             <div class="content">
-                                <p>(Just give me some time)</p>
+                                    <div class="ui very relaxed animated list">
+                                            {% for paper in similar_papers %}
+                                                <div class="item">
+                                                    <i class="file icon"></i>
+                                                    <div class="content">
+                                                        <div class="header"><a href="{{ paper[0] }}">{{paper[1]}}</a> - Similarity: {{paper[3]}}</div>
+                                                        <div class="description">{{paper[2]}}</div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                    </div>
                             </div>
                         </div>
                     </div>

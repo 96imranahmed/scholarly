@@ -14,6 +14,7 @@ p_loc, search_arr = pickle.load(file = open('./pickles/search_array.pickle', 'rb
 user_id_map = pickle.load(file=open('./pickles/user_id_maps.pickle', 'rb'))
 paper_dist =  pickle.load(file=open('./pickles/paper_dist_pruned.pickle', 'rb'))
 nbr_auth = pickle.load(file=open('./pickles/nbr_auth.pickle', 'rb'))
+nbr_paper = pickle.load(file=open('./pickles/nbr_paper.pickle', 'rb'))
 
 @application.route('/')
 def main():
@@ -26,19 +27,22 @@ def search_decorator():
 
 @application.route('/paper/<query>')
 def paper_decorator(query):
-    cur_item =  search_arr[int(query) + p_loc]
-    months = ["Unknown", "January", "Febuary", "March", "April", "May","June",
-              "July", "August", "September", "October", "November", "December"]
-    desc = ', '.join(cur_item[4])
-    date = datetime.datetime.utcfromtimestamp(cur_item[5])
-    desc = '(' + months[date.month] + ' '  + str(date.year) +') ' + desc
-    if len(desc) > 70:
-        desc = desc[:desc.find(', ',40)] + " and others"
+    cur_item = search_arr[int(query) + p_loc]
+    details =  get_paper_details(cur_item)
     authors = []
     for idx, auth_id in enumerate(cur_item[3]):
         rdm_paper = str(random.choice(search_arr[auth_id, 4]))
         authors.append((cur_item[4][idx].title(), num_papers_sub(search_arr[auth_id, :]), "/author/" + str(auth_id), rdm_paper.replace("\n", "").replace("  ", " ")))
-    return render_template('paper.html', title = cur_item[0].replace("\n", "").replace("  ", " "), subtitle = desc, authors = authors)
+    distances, indices = nbr_paper.kneighbors(paper_dist[int(query)].reshape(1, -1)) 
+    similar_papers = []
+    for idx, i in enumerate(indices[0]):
+        if not i == int(query):
+            sim_p =  search_arr[int(i) + p_loc]
+            entry = list(get_paper_details(sim_p))
+            entry.append(str(round(distances[0][idx], 3)))
+            similar_papers.append(entry)
+    similar_papers = similar_papers[:10]
+    return render_template('paper.html', title = details[1], subtitle = details[2], authors = authors, similar_papers = similar_papers)
 
 @application.route('/author/<query>')
 def author_decorator(query):
