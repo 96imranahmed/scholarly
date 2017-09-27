@@ -6,6 +6,7 @@ from sklearn.neighbors import NearestNeighbors
 import pickle
 from search import *
 from author import *
+from paper import *
 import random
 
 application = Flask(__name__)
@@ -33,7 +34,11 @@ def paper_decorator(query):
     desc = '(' + months[date.month] + ' '  + str(date.year) +') ' + desc
     if len(desc) > 70:
         desc = desc[:desc.find(', ',40)] + " and others"
-    return render_template('paper.html', title = cur_item[0].replace("\n", "").replace("  ", " "), subtitle = desc)
+    authors = []
+    for idx, auth_id in enumerate(cur_item[3]):
+        rdm_paper = str(random.choice(search_arr[auth_id, 4]))
+        authors.append((cur_item[4][idx].title(), num_papers_sub(search_arr[auth_id, :]), "/author/" + str(auth_id), rdm_paper.replace("\n", "").replace("  ", " ")))
+    return render_template('paper.html', title = cur_item[0].replace("\n", "").replace("  ", " "), subtitle = desc, authors = authors)
 
 @application.route('/author/<query>')
 def author_decorator(query):
