@@ -72,6 +72,22 @@
                                         {% endfor %}
                                 </div>
                         </div>
+                        <div class="title">
+                            <i class="dropdown icon"></i> Paper Topics
+                        </div>
+                        <div class="content">
+                                <div class="ui very relaxed animated divided list">
+                                        {% for topic in topics %}
+                                            <div class="item">
+                                                <i class="right triangle icon"></i>
+                                                <div class="content">
+                                                    <div class="header">Score: {{topic[0]}}</div>
+                                                    <div class="description">{{topic[1]}}</div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>

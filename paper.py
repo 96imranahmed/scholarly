@@ -19,13 +19,13 @@ def gen_word_cloud(dist,topics, num_required = 5):
     items = []
     pattern = re.compile('[\W_]+')
     #Presort list
-    dist = [(conf, idx) for idx, conf in enumerate(list(dist)) if not np.isnan(conf)]
+    dist = [(round(conf, 3), idx) for idx, conf in enumerate(list(dist)) if not ((np.isnan(conf)) or (conf < 0))]
     dist = sorted(dist, key = lambda p: p[0], reverse = True)
     for val in dist:
         if len(items) < num_required and not 'al.' in topics[val[1]]:
             items.append([val[0], topics[val[1]]])
     for item in items:
-        item[1] = [pattern.sub('', i) for i in item[1] if len(i) > 3]
+        item[1] = [pattern.sub('', i) for i in item[1] if len(i) > 2]
         pure_lst = []
         removables = set()
         for i in range(len(item[1])):
@@ -33,5 +33,5 @@ def gen_word_cloud(dist,topics, num_required = 5):
                 matches = difflib.get_close_matches(item[1][i], item[1], n=5, cutoff=0.6)
                 pure_lst.append(matches[0])
                 removables.update(matches)
-        item[1] = pure_lst
+        item[1] = ', '.join([i.title() for i in pure_lst])
     return items
