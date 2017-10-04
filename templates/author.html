@@ -23,7 +23,12 @@
         <div class="content card-content">
             <div class="header">{{ title }}</div>
             <div class="meta">
-                <span class="category">{{ subtitle }}</span>
+                <span class="category">{{ subtitle }} - 
+                    <a href="{{ auth_url }}" class="ui label">
+                            <i class="linkify icon"></i>
+                            Open author papers in Arxiv
+                    </a>
+                </span>
             </div>
             <div class="description">
                 <div class="ui styled fluid accordion">

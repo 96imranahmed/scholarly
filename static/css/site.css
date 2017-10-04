@@ -6,6 +6,11 @@ body {
     width:100%; 
 }
 
+.extra-content-highlight a {
+    color: #4183c4 !important;
+    text-decoration: none !important;
+}
+
 .header-title {
     color: #ffffff;
     text-align: center;

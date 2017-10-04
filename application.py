@@ -8,11 +8,14 @@ from search import *
 from author import *
 from paper import *
 import random
+import arxiv
 
 application = Flask(__name__)
 p_loc, search_arr = pickle.load(file = open('./pickles/search_array.pickle', 'rb'))
 user_id_map = pickle.load(file=open('./pickles/user_id_maps.pickle', 'rb'))
 paper_dist =  pickle.load(file=open('./pickles/paper_dist_pruned.pickle', 'rb'))
+paper_dist_norm = pickle.load(file=open('./pickles/paper_dist_norm.pickle', 'rb'))
+topic_words = pickle.load(file=open('./pickles/topics_pruned.pickle', 'rb'))
 nbr_auth = pickle.load(file=open('./pickles/nbr_auth.pickle', 'rb'))
 nbr_paper = pickle.load(file=open('./pickles/nbr_paper.pickle', 'rb'))
 
@@ -42,7 +45,13 @@ def paper_decorator(query):
             entry.append(str(round(distances[0][idx], 3)))
             similar_papers.append(entry)
     similar_papers = similar_papers[:10]
-    return render_template('paper.html', title = details[1], subtitle = details[2], authors = authors, similar_papers = similar_papers)
+    arxiv_details = arxiv.query(id_list=[cur_item[6]])[0]
+    summary_text = arxiv_details['summary']
+    arxiv_link = arxiv_details['arxiv_url']
+    pdf_link = arxiv_details['pdf_url']
+    rest_data = [summary_text, arxiv_link, pdf_link]
+    paper_cloud = gen_word_cloud(paper_dist_norm[int(query)], topic_words)
+    return render_template('paper.html', title = details[1], subtitle = details[2], authors = authors, similar_papers = similar_papers, api_data = rest_data, topics = paper_cloud)
 
 @application.route('/author/<query>')
 def author_decorator(query):
@@ -55,8 +64,10 @@ def author_decorator(query):
             rdm_paper = str(random.choice(search_arr[i, 4]))
             similar_authors.append((search_arr[i, 0].title(), num_papers_sub(search_arr[i, :]), "/author/" + str(search_arr[i, 2]), rdm_paper.replace("\n", "").replace("  ", " "), str(round(distances[0][idx], 3))))
     similar_authors = similar_authors[:10]
+    url = "https://arxiv.org/find/stat/1/au:+"+cur_item[6]+"/0/1/0/all/0/1"
     author_papers = get_papers_list(cur_item, int(query), search_arr, p_loc)
-    return render_template('author.html', title = cur_item[0].title(), subtitle= subtitle, similar = similar_authors, papers = author_papers)
+    
+    return render_template('author.html', title = cur_item[0].title(), subtitle= subtitle, similar = similar_authors, papers = author_papers, auth_url = url)
 
 # run the application.
 if __name__ == "__main__":
