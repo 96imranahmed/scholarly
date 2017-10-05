@@ -14,12 +14,50 @@
         <h1 class="override-margins top-override-margins">Scholarly</h1>
         <h4 class="override-margins">Semantic Search of Machine-Learning Literature</h4>
     </div>
-    <div class="ui fluid category search search-pos">
-        <div class="ui icon input partial-width">
-            <input class="prompt" type="text" placeholder="Search by { ?author, ?paper, ?surname = ABC; }">
-            <i class="search icon"></i>
+    <div class="search-pos">
+        <div class="ui fluid category search ">
+            <div class="ui icon input partial-width">
+                <input class="prompt" type="text" placeholder="Search by { ?author, ?paper, ?surname = ABC; }">
+                <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+
         </div>
-        <div class="results"></div>
+        <div class="ui card card-width">
+            <div class="content">
+                <div class="header">Thanks for dropping by!</div>
+                <div class="meta">A brief introduction</div>
+                <div class="description">
+                    <p><b>Scholarly.ML</b> is designed to allow researchers to discover colleagues with similar research interests through the semantic analysis of arxiv abstracts. Scholarly doesn't tackle the pure literature discovery problem like <a href=https://www.semanticscholar.org/>Semantic
+                        Scholar</a> - it instead chooses to focus on giving researchers the chance to find interesting colleagues to collaborate with as well as discover some insights about the research that currently exists within ML.</p>
+                        
+                        </p>How about you search for an interesting ML researcher like <b>David Sontag</b> or for an interesting <b>Generative Adversarial Network</b> paper?</p>
+                        
+                    </p>It's probably worth noting the following:
+                        <ul class="ui list">
+                            <li>More features are planned - but given university deadlines, updates will be slow! Current ideas include: </li>
+                            <ul>
+                                <li>An 'Author Graph' do discover your immediate research network</li>
+                                <li>Clustering and graphical analysis to determine the seminal paper - without citations</li>
+                                <li>Integrations with Citations/PDF analysis</li>
+                            </ul>
+                            <li>All the processing was done in an entirely unsupervised manner with absolutely no labels</li>
+                            <li>Current drawbacks that will need to be addressed include: 
+                                <ul>
+                                    <li>Using a static dataset with data up to July 2017. Making it dynamic will require infrastructure that will cost :(</li>
+                                    <li>The dataset is exclusively scraped from arxiv.org and due to computing restrictions, is restricted to purely ML/AI papers</li>
+                                    <li>The server is heavily RAM limited due to the large dataset sizes and AWS Free Tier restrictions</li>
+                                    <li>Semantic analysis is only based on the abstracts provided on arxiv.org - currently no other data is being pulled</li>
+                                    <li>The underlying model used tends to bias towards very general concepts as opposed to 'novel' research topics. This makes it difficult
+                                        to flag truly novel papers. Doing this will require some sort of rethink.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

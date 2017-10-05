@@ -50,10 +50,11 @@ body {
 .search-pos {
     position: absolute !important;
     left: 50%;
-    top: 50%;
+    top: 50% !important;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 80%;
+    max-width: 600px;
 }
 
 .top-search-pos {
@@ -72,6 +73,14 @@ body {
     margin: -20 auto !important;
     width: 80% !important;
     max-width: 750px !important;
+}
+
+.card-width {
+    margin: 0 auto !important;
+    overflow-y: scroll !important;
+    max-height: 350px !important;
+    width: 90% !important;
+    max-width: 600px !important;
 }
 
 .meta {
