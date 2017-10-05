@@ -24,6 +24,9 @@
             <div class="header">{{ title }}</div>
             <div class="meta">
                 <span class="category">{{ subtitle }} - 
+                    {% if big_dog %}
+                    <div class="ui red label">Influential</div>
+                    {% endif %}
                     <a href="{{ auth_url }}" class="ui label">
                             <i class="linkify icon"></i>
                             Find author on Arxiv
@@ -68,7 +71,18 @@
                         <i class="dropdown icon"></i> Research Areas
                     </div>
                     <div class="content">
-                        <p>(Just give me some time)</p>
+                        <p><b>Note:</b> these won't be perfect although it should reflect the gist of their research</p>
+                        <div class="ui very relaxed animated divided list">
+                            {% for topic in topics %}
+                                <div class="item">
+                                    <i class="right triangle icon"></i>
+                                    <div class="content">
+                                        <div class="header">Score: {{topic[0]}}</div>
+                                        <div class="description">{{topic[1]}}</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

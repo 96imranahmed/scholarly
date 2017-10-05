@@ -18,6 +18,8 @@ paper_dist_norm = pickle.load(file=open('./pickles/paper_dist_norm.pickle', 'rb'
 topic_words = pickle.load(file=open('./pickles/topics_pruned.pickle', 'rb'))
 nbr_auth = pickle.load(file=open('./pickles/nbr_auth.pickle', 'rb'))
 nbr_paper = pickle.load(file=open('./pickles/nbr_paper.pickle', 'rb'))
+paper_sum = [len(i[3]) for i in search_arr[:p_loc]]
+pap_mean, pap_std = np.mean(paper_sum), np.mean(paper_sum)
 
 @application.route('/')
 def main():
@@ -57,7 +59,8 @@ def paper_decorator(query):
 def author_decorator(query):
     cur_item = search_arr[int(query)]
     subtitle = num_papers_sub(cur_item)
-    distances, indices = nbr_auth.kneighbors(get_user_research(paper_dist, cur_item[3]))
+    cur_areas = get_user_research(paper_dist, cur_item[3])
+    distances, indices = nbr_auth.kneighbors(cur_areas)
     similar_authors = []
     for idx, i in enumerate(indices[0]):
         if not i == int(query):
@@ -66,8 +69,11 @@ def author_decorator(query):
     similar_authors = similar_authors[:10]
     url = "https://arxiv.org/find/stat/1/au:+"+cur_item[6]+"/0/1/0/all/0/1"
     author_papers = get_papers_list(cur_item, int(query), search_arr, p_loc)
-    
-    return render_template('author.html', title = cur_item[0].title(), subtitle= subtitle, similar = similar_authors, papers = author_papers, auth_url = url)
+    area_cloud = gen_word_cloud(cur_areas[0], topic_words)
+    influential = False
+    if (len(cur_item[3]) - pap_mean)/pap_std > 8:
+        influential = True
+    return render_template('author.html', title = cur_item[0].title(), subtitle= subtitle, similar = similar_authors, papers = author_papers, auth_url = url, big_dog = influential, topics = area_cloud)
 
 # run the application.
 if __name__ == "__main__":
